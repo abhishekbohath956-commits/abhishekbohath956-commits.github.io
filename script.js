@@ -12,42 +12,36 @@ document.querySelectorAll('.nav-links a').forEach(link => {
   link.addEventListener('click', () => navLinks.classList.remove('open'));
 });
 
-// ===== TYPING EFFECT =====
-const typedEl = document.getElementById('typed-text');
-const phrases = [
+// ===== TYPING EFFECT — words appear one by one in a single line with | separator =====
+const linesContainer = document.getElementById('typed-lines');
+const lines = [
   'Restaurant Captain',
-  'Guest Service Expert',
+  'Guest Service',
   'Floor Management',
   'Team Coordination'
 ];
-let phraseIndex = 0;
-let charIndex = 0;
-let deleting = false;
 
-function type() {
-  const current = phrases[phraseIndex];
-
-  if (!deleting) {
-    typedEl.textContent = current.slice(0, charIndex + 1);
-    charIndex++;
-    if (charIndex === current.length) {
-      // pause before deleting
-      setTimeout(() => { deleting = true; type(); }, 1800);
-      return;
-    }
-  } else {
-    typedEl.textContent = current.slice(0, charIndex - 1);
-    charIndex--;
-    if (charIndex === 0) {
-      deleting = false;
-      phraseIndex = (phraseIndex + 1) % phrases.length;
-    }
-  }
-
-  setTimeout(type, deleting ? 60 : 100);
+function showLines() {
+  lines.forEach((text, i) => {
+    setTimeout(() => {
+      // add separator before each word except the first
+      if (i > 0) {
+        const sep = document.createElement('span');
+        sep.classList.add('typed-sep');
+        sep.textContent = '|';
+        linesContainer.appendChild(sep);
+        setTimeout(() => sep.classList.add('show'), 100);
+      }
+      const word = document.createElement('span');
+      word.classList.add('typed-word');
+      word.textContent = text;
+      linesContainer.appendChild(word);
+      setTimeout(() => word.classList.add('show'), 150);
+    }, i * 600);
+  });
 }
-// Start typing after a short delay
-setTimeout(type, 800);
+
+setTimeout(showLines, 600);
 
 // ===== TIMELINE SLIDE-IN FROM LEFT =====
 const timelineCards = document.querySelectorAll('.timeline-card');

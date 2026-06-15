@@ -11,6 +11,41 @@
   50%       { opacity: 0; }
 }
 
+/* ===== TYPED LINES ===== */
+#typed-lines {
+  min-height: 2em;
+  line-height: 1.8;
+  font-size: clamp(0.75rem, 1.5vw, 1rem);
+  font-weight: 400;
+  color: var(--gold-light);
+  margin-bottom: 10px;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.typed-word {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  white-space: nowrap;
+}
+.typed-word.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+.typed-sep {
+  color: #c084fc;
+  margin: 0 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  font-weight: 300;
+}
+.typed-sep.show {
+  opacity: 1;
+}
+
 /* ===== SLIDE-IN (timeline) ===== */
 .timeline-card {
   opacity: 0;
@@ -158,10 +193,8 @@ body {
   margin-bottom: 14px;
 }
 .hero-title {
-  font-size: clamp(0.95rem, 2vw, 1.15rem);
-  color: var(--gold-light);
-  font-weight: 400; margin-bottom: 10px;
-  line-height: 1.5;
+  margin-bottom: 10px;
+  min-height: 2em;
 }
 .hero-location {
   font-size: 0.9rem; color: var(--text-muted); margin-bottom: 32px;
