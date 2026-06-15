@@ -12,32 +12,29 @@ document.querySelectorAll('.nav-links a').forEach(link => {
   link.addEventListener('click', () => navLinks.classList.remove('open'));
 });
 
-// ===== TYPING EFFECT — words appear one by one in a single line with | separator =====
+// ===== TYPING EFFECT — static single line with | and , separators =====
 const linesContainer = document.getElementById('typed-lines');
-const lines = [
-  'Restaurant Captain',
-  'Guest Service',
-  'Floor Management',
-  'Team Coordination'
+
+const parts = [
+  { text: 'Restaurant Captain', sep: ' | ' },
+  { text: 'Guest Service, Floor Management & Team Coordination', sep: '' }
 ];
 
 function showLines() {
-  lines.forEach((text, i) => {
+  parts.forEach((part, i) => {
     setTimeout(() => {
-      // add separator before each word except the first
       if (i > 0) {
         const sep = document.createElement('span');
-        sep.classList.add('typed-sep');
+        sep.classList.add('typed-sep', 'show');
         sep.textContent = '|';
         linesContainer.appendChild(sep);
-        setTimeout(() => sep.classList.add('show'), 100);
       }
       const word = document.createElement('span');
       word.classList.add('typed-word');
-      word.textContent = text;
+      word.textContent = part.text;
       linesContainer.appendChild(word);
       setTimeout(() => word.classList.add('show'), 150);
-    }, i * 600);
+    }, i * 700);
   });
 }
 
